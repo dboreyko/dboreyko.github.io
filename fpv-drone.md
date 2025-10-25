@@ -13,6 +13,8 @@ title: FPV Drone — Long-Range Recon Platform
 **Results:** 13 min hover, 2.1 km video, >65mph/105kmh top speed(estimated.  
 **Verification:** video log, test-range validation.
 
+[San Francisco from the eyes of a drone](https://www.youtube.com/watch?v=hEKOgZUcE9M)
+
 ---
 
 Return to [Home](./index.md)
