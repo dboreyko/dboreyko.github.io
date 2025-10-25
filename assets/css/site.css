@@ -164,3 +164,102 @@ pre{ padding:12px; overflow:auto; }
   .card{ box-shadow:none; }
   body{ background:#fff; color:#000; }
 }
+/* =========================
+   ANDURIL-STYLE MICRO-MOTION
+   ========================= */
+
+/* Tokens */
+:root{
+  --primary-accent-hover:#00b8e6; /* hover tint for accent */
+}
+
+/* 1) Interactive emphasis: buttons, links, cards */
+.button{
+  will-change: transform, background-color, box-shadow;
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.button:hover{
+  background-color: var(--primary-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,229,255,.4);
+}
+a{
+  transition: color .15s ease, text-shadow .15s ease;
+}
+a:hover{
+  text-shadow: 0 0 6px rgba(0,229,255,.5);
+}
+.card{
+  box-shadow: 0 0 5px rgba(0,229,255,0);
+  will-change: box-shadow, transform, border-color;
+  transition: box-shadow .25s ease-in-out, transform .15s ease, border-color .15s ease;
+}
+.card:hover{
+  box-shadow: 0 0 15px rgba(0,229,255,.6);
+  transform: translateY(-1px);
+}
+
+/* 2) Purposeful state change animations */
+.new-card{
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity .5s ease-out, transform .5s ease-out;
+}
+.new-card.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3) Reveal/hide with max-height (avoid height:auto) */
+.collapsible-panel{
+  max-height: 0;
+  overflow: hidden;
+  will-change: max-height;
+  transition: max-height .3s ease-out;
+}
+.collapsible-panel.is-expanded{
+  max-height: 500px; /* set above expected content */
+}
+
+/* 4) Status indicators with subtle pulse */
+.status-indicator{
+  position: relative;
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background-color: #555;
+  box-shadow: 0 0 4px rgba(255,255,255,.1);
+}
+.status-indicator.active{
+  background-color: var(--secondary-accent);
+  box-shadow: 0 0 5px var(--secondary-accent);
+}
+.status-indicator.active::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--secondary-accent);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%   { transform: scale(1);   opacity:.7; }
+  50%  { transform: scale(1.5); opacity:0; }
+  100% { transform: scale(1);   opacity:0; }
+}
+
+/* 5) Performance hints */
+.hover-anim, .tap-anim{
+  will-change: transform, opacity;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* 6) Respect reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
