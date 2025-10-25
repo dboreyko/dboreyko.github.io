@@ -1,30 +1,166 @@
-body {
-  background-color: #0e1114;
-  color: #d0d4d8;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: 0.2px;
-  line-height: 1.5;
+/* =========================
+   ANDURIL-STYLE MILITARY UI
+   ========================= */
+
+/* ---- Tokens ---- */
+:root{
+  --bg:#0c0c0c;              /* near-black */
+  --surface:#161819;          /* cards/panels */
+  --surface-2:#1c1c1c;        /* headers/alt panels */
+  --border:#2a2f33;           /* outlines */
+  --muted:#9aa3ab;            /* secondary text */
+  --text:#dde1e5;             /* primary text */
+  --accent:#00e5ff;           /* primary CTA/cursor */
+  --accent-2:#00ff7f;         /* success/active */
+  --warn:#ffcc00;             /* warning */
+  --danger:#ff5e5e;           /* error */
+  --shadow:rgba(0,0,0,.35);
+  --radius:10px;
+  --pad:18px;
 }
 
-a {
-  color: #5ec4ff;
-  text-decoration: none;
+/* ---- Base ---- */
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding:0;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
-a:hover { text-decoration: underline; }
+body{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Roboto Mono", "Source Code Pro", monospace;
+  letter-spacing:.15px;
+}
+*{box-sizing:border-box}
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 32px;
+/* ---- Global Elements ---- */
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+p{ margin:0 0 12px; }
+ul,ol{ margin:0 0 12px 22px; }
+hr{
+  border:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--border), transparent);
+  margin:24px 0;
+}
+img{ max-width:100%; height:auto; border-radius:8px; }
+figure{ margin:0; }
+figcaption{ color:var(--muted); font-size:.9rem; margin-top:6px; }
+
+/* ---- Headings ---- */
+h1,h2,h3,h4{
+  margin:0 0 10px;
+  font-weight:600;
+  line-height:1.25;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+h1{ font-size:1.6rem; color:var(--text); }
+h2{ font-size:1.2rem; color:var(--accent); }
+h3{ font-size:1rem;  color:var(--text); }
+
+/* ---- Jekyll Cayman overrides (optional) ---- */
+.page-header{
+  background:linear-gradient(180deg, #0e1012 0%, #0c0c0c 80%);
+  border-bottom:1px solid var(--border);
+}
+.project-name,.project-tagline{ color:var(--text)!important; }
+.main-content{ color:var(--text); }
+
+/* ---- Layout ---- */
+.container{ max-width:1100px; margin:0 auto; padding:24px; }
+.project-grid{
+  display:grid;
+  gap:20px;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  margin-top:16px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:var(--pad);
+  box-shadow:0 4px 14px var(--shadow);
+  transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.card:hover{
+  border-color:var(--accent);
+  box-shadow:0 6px 18px rgba(0,229,255,.15);
+  transform:translateY(-1px);
+}
+.card h3{ margin-top:2px; color:var(--accent); }
+
+/* ---- List-format project spec ---- */
+.spec-list{ list-style:none; margin:8px 0 0; padding:0; }
+.spec-list li{ padding:6px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.spec-list b{ color:#cfe8ff; }
+
+/* ---- Buttons / Inputs ---- */
+.button{
+  display:inline-block;
+  padding:10px 18px;
+  background:var(--accent);
+  color:#021014;
+  border:0;
+  border-radius:8px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  cursor:pointer;
+  transition:filter .2s ease, transform .05s ease;
+}
+.button:hover{ filter:brightness(.9); }
+.button:active{ transform:translateY(1px); }
+
+.input{
+  width:100%;
+  background:var(--surface-2);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 12px;
 }
 
-.card {
-  background: #12161b;
-  border: 1px solid #1f2429;
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.4);
-  transition: 0.2s ease;
+/* ---- Tables ---- */
+table{ width:100%; border-collapse:collapse; margin:10px 0; }
+th,td{ padding:10px 8px; border-bottom:1px solid var(--border); text-align:left; }
+th{ color:var(--accent); text-transform:uppercase; font-size:.85rem; }
+
+/* ---- Accents / Status ---- */
+.glow{ color:var(--accent); text-shadow:0 0 6px rgba(0,229,255,.8); }
+.status{
+  display:inline-block; width:10px; height:10px; border-radius:50%;
+  margin-right:8px; background:#555;
+  box-shadow:0 0 4px rgba(255,255,255,.1);
 }
-.card:hover { border-color: #5ec4ff; box-shadow: 0 0 14px rgba(94,196,255,0.3); }
+.status.ok{ background:var(--accent-2); box-shadow:0 0 6px rgba(0,255,127,.7); }
+.status.warn{ background:var(--warn); box-shadow:0 0 6px rgba(255,204,0,.7); }
+.status.err{ background:var(--danger); box-shadow:0 0 6px rgba(255,94,94,.7); }
+
+/* ---- Code / Pre ---- */
+code, pre{
+  background: #0a0b0c;
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:#cfe8ff;
+}
+code{ padding:2px 6px; }
+pre{ padding:12px; overflow:auto; }
+
+/* ---- Footer ---- */
+.footer{
+  margin-top:28px;
+  color:var(--muted);
+  font-size:.9rem;
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
+
+/* ---- Print tweaks (for PDF export) ---- */
+@media print{
+  a{ color:#000; text-decoration:underline; }
+  .card{ box-shadow:none; }
+  body{ background:#fff; color:#000; }
+}
