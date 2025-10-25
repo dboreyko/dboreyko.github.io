@@ -1,3 +1,8 @@
+---
+layout: default
+title: FPV Drone — Long-Range Recon Platform
+---
+
 <link rel="stylesheet" href="./assets/css/site.css">
 
 # FPV Drone — Long-Range Recon Platform
