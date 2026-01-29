@@ -7,10 +7,7 @@ import { Contact } from '@/app/components/Contact';
 
 export default function App() {
   return (
-    <div 
-      className="min-h-screen"
-      style={{ fontFamily: 'var(--font-sans)' }}
-    >
+    <div className="min-h-screen">
       <Hero />
       <FlagshipSystem />
       <About />

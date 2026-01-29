@@ -128,11 +128,7 @@ export function FlagshipSystem() {
     <section
       id="flagship-system"
       ref={sectionRef}
-      className="py-24 px-6 md:px-12 transition-colors duration-500 relative"
-      style={{
-        backgroundColor: isExpanded ? 'var(--bg-lab)' : 'var(--bg-museum)',
-        minHeight: isExpanded ? '100vh' : 'auto',
-      }}
+      className={`flagship-section py-24 px-6 md:px-12 transition-colors duration-500 relative ${isExpanded ? 'flagship-section--expanded' : ''}`}
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -147,48 +143,25 @@ export function FlagshipSystem() {
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-3">
                 <span
-                  className="px-3 py-1 border uppercase tracking-wider"
-                  style={{
-                    fontSize: '0.625rem',
-                    fontWeight: 'var(--font-weight-medium)',
-                    borderColor: isExpanded ? 'var(--accent-steel)' : 'var(--gray-400)',
-                    color: isExpanded ? 'var(--accent-steel)' : 'var(--gray-600)',
-                  }}
+                  className="flagship-badge px-3 py-1 border uppercase tracking-wider"
                 >
                   In Development
                 </span>
                 <span
-                  className="uppercase tracking-wider"
-                  style={{
-                    fontSize: '0.625rem',
-                    fontWeight: 'var(--font-weight-medium)',
-                    color: isExpanded ? 'var(--gray-500)' : 'var(--gray-600)',
-                  }}
+                  className="flagship-kicker uppercase tracking-wider"
                 >
                   Flagship System
                 </span>
               </div>
               
               <h2
-                className="mb-4"
-                style={{
-                  fontSize: 'clamp(1.75rem, 4vw, 3rem)',
-                  fontWeight: 'var(--font-weight-bold)',
-                  lineHeight: '1.2',
-                  letterSpacing: '-0.02em',
-                  color: isExpanded ? 'var(--gray-100)' : 'var(--gray-900)',
-                }}
+                className="flagship-title mb-4"
               >
                 GPS Human-Follow Quadcopter
               </h2>
               
               <p
-                className="max-w-2xl"
-                style={{
-                  fontSize: '1rem',
-                  lineHeight: '1.6',
-                  color: isExpanded ? 'var(--gray-400)' : 'var(--gray-600)',
-                }}
+                className="flagship-subtitle max-w-2xl"
               >
                 AI Tracking + GPS Autonomy
               </p>
@@ -196,15 +169,7 @@ export function FlagshipSystem() {
             
             <button
               onClick={isExpanded ? handleCollapse : handleExpand}
-              className="flex items-center gap-2 px-6 py-3 border transition-all duration-300 hover:bg-opacity-10"
-              style={{
-                fontSize: '0.75rem',
-                fontWeight: 'var(--font-weight-medium)',
-                letterSpacing: '0.05em',
-                borderColor: isExpanded ? 'var(--accent-steel)' : 'var(--gray-400)',
-                color: isExpanded ? 'var(--accent-steel)' : 'var(--gray-700)',
-                backgroundColor: isExpanded ? 'rgba(91, 143, 163, 0.1)' : 'transparent',
-              }}
+              className={`flagship-toggle flex items-center gap-2 px-6 py-3 border transition-all duration-300 hover:bg-opacity-10 ${isExpanded ? 'flagship-toggle--expanded' : ''}`}
             >
               {isExpanded ? (
                 <>
@@ -223,11 +188,7 @@ export function FlagshipSystem() {
 
         {/* Fixed-height content container with spine navigator */}
         <div
-          className="relative overflow-hidden transition-all duration-500"
-          style={{
-            height: isExpanded ? '70vh' : '0',
-            minHeight: isExpanded ? '600px' : '0',
-          }}
+          className={`relative overflow-hidden transition-all duration-500 ${isExpanded ? 'h-[70vh] min-h-[600px]' : 'h-0 min-h-0'}`}
         >
           <AnimatePresence>
             {isExpanded && (
@@ -245,51 +206,28 @@ export function FlagshipSystem() {
                       <button
                         key={phase.id}
                         onClick={() => handlePhaseClick(phase.id)}
-                        className="group relative flex items-center gap-4"
-                        style={{
-                          cursor: 'pointer',
-                        }}
+                        className={`flagship-phase-button group ${activePhase === phase.id ? 'is-active' : ''}`}
                       >
                         {/* Tick mark and vertical line */}
                         <div className="relative flex items-center">
                           <div
-                            className="w-12 h-px transition-all duration-200"
-                            style={{
-                              backgroundColor: activePhase === phase.id ? 'var(--accent-steel)' : 'var(--gray-700)',
-                              opacity: activePhase === phase.id ? 1 : 0.4,
-                            }}
+                            className="flagship-phase-line"
                           />
                           <div
-                            className="w-2 h-2 rounded-full border-2 transition-all duration-200"
-                            style={{
-                              borderColor: activePhase === phase.id ? 'var(--accent-steel)' : 'var(--gray-700)',
-                              backgroundColor: activePhase === phase.id ? 'var(--accent-steel)' : 'transparent',
-                            }}
+                            className="flagship-phase-dot"
                           />
                         </div>
                         
                         {/* Phase number - always visible */}
                         <span
-                          className="font-mono transition-all duration-200"
-                          style={{
-                            fontSize: '0.875rem',
-                            fontWeight: 'var(--font-weight-medium)',
-                            color: activePhase === phase.id ? 'var(--accent-steel)' : 'var(--gray-600)',
-                            letterSpacing: '0.05em',
-                          }}
+                          className="flagship-phase-number"
                         >
                           {phase.number}
                         </span>
 
                         {/* Phase label - hover only */}
                         <span
-                          className="absolute left-20 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-                          style={{
-                            fontSize: '0.75rem',
-                            fontWeight: 'var(--font-weight-medium)',
-                            color: 'var(--gray-400)',
-                            letterSpacing: '0.03em',
-                          }}
+                          className="flagship-phase-label absolute left-20 whitespace-nowrap opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100"
                         >
                           {phase.label}
                         </span>
@@ -312,26 +250,13 @@ export function FlagshipSystem() {
                       {/* Phase Title and Description */}
                       {currentPhaseData && (
                         <div className="mb-8">
-                          <div className="border-l-2 pl-6" style={{ borderColor: 'var(--accent-steel)' }}>
+                          <div className="border-l-2 border-[var(--accent-steel)] pl-6">
                             <div className="flex items-baseline gap-4 mb-2">
-                              <h3
-                                style={{
-                                  fontSize: '1.5rem',
-                                  fontWeight: 'var(--font-weight-semibold)',
-                                  color: 'var(--gray-200)',
-                                  letterSpacing: '-0.01em',
-                                }}
-                              >
+                              <h3 className="flagship-phase-title">
                                 {currentPhaseData.title}
                               </h3>
                             </div>
-                            <p
-                              style={{
-                                fontSize: '0.9375rem',
-                                lineHeight: '1.7',
-                                color: 'var(--gray-400)',
-                              }}
-                            >
+                            <p className="flagship-phase-description">
                               {currentPhaseData.description}
                             </p>
                           </div>
@@ -346,19 +271,11 @@ export function FlagshipSystem() {
                       {/* Terminal Actions - Only visible in Phase 4 */}
                       {activePhase === 'integration' && (
                         <div
-                          className="mt-8 pt-8 border-t flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6"
-                          style={{ borderColor: 'var(--gray-800)' }}
+                          className="mt-8 pt-8 border-t border-[var(--gray-800)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6"
                         >
                           <button
                             onClick={handleCollapseAndScrollToAbout}
-                            className="flex items-center justify-center gap-2 px-8 py-4 border transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
-                            style={{
-                              fontSize: '0.75rem',
-                              fontWeight: 'var(--font-weight-medium)',
-                              letterSpacing: '0.05em',
-                              borderColor: 'var(--gray-700)',
-                              color: 'var(--gray-400)',
-                            }}
+                            className="flagship-terminal-action flagship-terminal-action-muted flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
                           >
                             <Minus className="w-4 h-4" />
                             COLLAPSE SYSTEM
@@ -366,14 +283,7 @@ export function FlagshipSystem() {
 
                           <button
                             onClick={scrollToAbout}
-                            className="flex items-center justify-center gap-2 px-8 py-4 border transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
-                            style={{
-                              fontSize: '0.75rem',
-                              fontWeight: 'var(--font-weight-medium)',
-                              letterSpacing: '0.05em',
-                              borderColor: 'var(--accent-steel)',
-                              color: 'var(--accent-steel)',
-                            }}
+                            className="flagship-terminal-action flagship-terminal-action-primary flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
                           >
                             CONTINUE TO ABOUT
                             <ArrowDown className="w-4 h-4" />
@@ -384,18 +294,9 @@ export function FlagshipSystem() {
                       {/* Technical Summary - Only visible in non-terminal phases */}
                       {activePhase !== 'integration' && (
                         <div
-                          className="mt-8 pt-8 border-t"
-                          style={{ borderColor: 'var(--gray-800)' }}
+                          className="mt-8 pt-8 border-t border-[var(--gray-800)]"
                         >
-                          <p
-                            className="max-w-3xl"
-                            style={{
-                              fontSize: '0.875rem',
-                              lineHeight: '1.8',
-                              color: 'var(--gray-500)',
-                              fontStyle: 'italic',
-                            }}
-                          >
+                          <p className="flagship-summary max-w-3xl">
                             Use spine navigator to explore each subsystem. Experimental platform designed for 
                             eventual real-world deployment with scalable architecture for higher-power aerial platforms.
                           </p>

@@ -32,16 +32,7 @@ export function Contact() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="mb-16"
-            style={{
-              fontSize: '2rem',
-              fontWeight: 'var(--font-weight-bold)',
-              lineHeight: '1.2',
-              letterSpacing: '-0.01em',
-              color: 'var(--gray-900)',
-            }}
-          >
+          <h2 className="section-title mb-16">
             Contact
           </h2>
 
@@ -56,44 +47,23 @@ export function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group border p-6 transition-all duration-300 hover:border-[var(--gray-900)]"
-                style={{ borderColor: 'var(--gray-300)' }}
+                className="group border border-[var(--gray-300)] p-6 transition-all duration-300 hover:border-[var(--gray-900)]"
               >
                 <div className="flex flex-col gap-4">
                   <div
-                    className="w-10 h-10 flex items-center justify-center border transition-all duration-300 group-hover:border-[var(--gray-900)]"
-                    style={{ borderColor: 'var(--gray-400)' }}
+                    className="w-10 h-10 flex items-center justify-center border border-[var(--gray-400)] transition-all duration-300 group-hover:border-[var(--gray-900)]"
                   >
                     <contact.icon
-                      className="w-5 h-5"
-                      style={{ color: 'var(--gray-600)' }}
+                      className="contact-card-icon w-5 h-5"
                       strokeWidth={1.5}
                     />
                   </div>
                   
                   <div>
-                    <p
-                      className="mb-2"
-                      style={{
-                        fontSize: '0.625rem',
-                        fontWeight: 'var(--font-weight-medium)',
-                        letterSpacing: '0.1em',
-                        color: 'var(--gray-500)',
-                        textTransform: 'uppercase',
-                      }}
-                    >
+                    <p className="contact-card-label mb-2">
                       {contact.label}
                     </p>
-                    <p
-                      className="transition-colors duration-300 group-hover:text-[var(--gray-900)]"
-                      style={{
-                        fontSize: '0.875rem',
-                        fontWeight: 'var(--font-weight-medium)',
-                        color: 'var(--gray-700)',
-                        fontFamily: 'var(--font-mono)',
-                        wordBreak: 'break-word',
-                      }}
-                    >
+                    <p className="contact-card-value transition-colors duration-300 group-hover:text-[var(--gray-900)]">
                       {contact.value}
                     </p>
                   </div>
@@ -108,16 +78,9 @@ export function Contact() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-20 pt-12 border-t"
-            style={{ borderColor: 'var(--gray-300)' }}
+            className="mt-20 pt-12 border-t border-[var(--gray-300)]"
           >
-            <p
-              style={{
-                fontSize: '0.875rem',
-                color: 'var(--gray-500)',
-                textAlign: 'center',
-              }}
-            >
+            <p className="contact-footer">
               © 2026 Dimitry Boreyko. Precision engineering.
             </p>
           </motion.div>

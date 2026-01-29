@@ -121,52 +121,31 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="flex items-start justify-between gap-4">
           <h4
             onClick={project.deepLink ? handleTitleClick : undefined}
-            className={`flex-1 relative ${project.deepLink ? 'cursor-pointer' : ''}`}
-            style={{
-              fontSize: '1rem',
-              fontWeight: 'var(--font-weight-medium)',
-              color: 'var(--gray-900)',
-              lineHeight: '1.4',
-            }}
+            className={`project-title flex-1 relative ${project.deepLink ? 'cursor-pointer' : ''}`}
           >
             <span className="relative inline-flex items-center gap-1.5">
               {project.title}
               {project.deepLink && (
                 <ArrowUpRight 
-                  className="w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
-                  style={{ color: 'var(--gray-900)' }}
+                  className="project-link-icon w-3.5 h-3.5 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
                   strokeWidth={2}
                 />
               )}
               {project.deepLink && (
                 <span 
-                  className="absolute bottom-0 left-0 w-0 h-px bg-[var(--gray-900)] transition-all duration-300 group-hover:w-full"
-                  style={{ marginTop: '2px' }}
+                  className="project-underline absolute bottom-0 left-0 w-0 h-px bg-[var(--gray-900)] transition-all duration-300 group-hover:w-full"
                 />
               )}
             </span>
           </h4>
           <span
-            className="px-2 py-0.5 flex-shrink-0"
-            style={{
-              fontSize: '0.625rem',
-              fontWeight: 'var(--font-weight-medium)',
-              color: 'var(--gray-500)',
-              backgroundColor: 'var(--gray-200)',
-              letterSpacing: '0.03em',
-            }}
+            className="project-status px-2 py-0.5 flex-shrink-0"
           >
             {project.status}
           </span>
         </div>
         
-        <p
-          style={{
-            fontSize: '0.875rem',
-            lineHeight: '1.6',
-            color: 'var(--gray-600)',
-          }}
-        >
+        <p className="project-description">
           {project.description}
         </p>
 
@@ -176,13 +155,7 @@ function ProjectCard({ project }: { project: Project }) {
               <button
                 key={idx}
                 onClick={() => handleEvidenceClick(evidence)}
-                className="group/link flex items-center gap-1.5 relative cursor-pointer"
-                style={{
-                  fontSize: '0.75rem',
-                  fontWeight: 'var(--font-weight-medium)',
-                  color: 'var(--gray-500)',
-                  letterSpacing: '0.03em',
-                }}
+                className="project-evidence group/link flex items-center gap-1.5 relative cursor-pointer"
               >
                 <span className="relative">
                   {evidence.type.charAt(0).toUpperCase() + evidence.type.slice(1)}
@@ -191,8 +164,7 @@ function ProjectCard({ project }: { project: Project }) {
                   />
                 </span>
                 <ArrowUpRight 
-                  className="w-3 h-3 opacity-0 -translate-x-1 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0"
-                  style={{ color: 'var(--gray-900)' }}
+                  className="project-link-icon w-3 h-3 opacity-0 -translate-x-1 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0"
                   strokeWidth={2}
                 />
               </button>
@@ -223,32 +195,13 @@ export function Projects() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="mb-16"
-            style={{
-              fontSize: '2rem',
-              fontWeight: 'var(--font-weight-bold)',
-              lineHeight: '1.2',
-              letterSpacing: '-0.01em',
-              color: 'var(--gray-900)',
-            }}
-          >
+          <h2 className="section-title mb-16">
             Projects
           </h2>
 
           {/* Personal Projects */}
           <div className="mb-20">
-            <h3
-              className="mb-8 pb-3 border-b"
-              style={{
-                fontSize: '0.875rem',
-                fontWeight: 'var(--font-weight-semibold)',
-                letterSpacing: '0.1em',
-                color: 'var(--gray-700)',
-                textTransform: 'uppercase',
-                borderColor: 'var(--gray-300)',
-              }}
-            >
+            <h3 className="subtitle-wide mb-8 pb-3 border-b border-[var(--gray-300)]">
               Personal
             </h3>
             <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
@@ -268,17 +221,7 @@ export function Projects() {
 
           {/* University / Clubs */}
           <div>
-            <h3
-              className="mb-8 pb-3 border-b"
-              style={{
-                fontSize: '0.875rem',
-                fontWeight: 'var(--font-weight-semibold)',
-                letterSpacing: '0.1em',
-                color: 'var(--gray-700)',
-                textTransform: 'uppercase',
-                borderColor: 'var(--gray-300)',
-              }}
-            >
+            <h3 className="subtitle-wide mb-8 pb-3 border-b border-[var(--gray-300)]">
               University / Clubs
             </h3>
             <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">

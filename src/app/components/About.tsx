@@ -14,16 +14,7 @@ export function About() {
           {/* Left: Title */}
           <div className="md:col-span-4">
             <div className="md:sticky md:top-32">
-              <h2
-                className="mb-4"
-                style={{
-                  fontSize: '2rem',
-                  fontWeight: 'var(--font-weight-bold)',
-                  lineHeight: '1.2',
-                  letterSpacing: '-0.01em',
-                  color: 'var(--gray-900)',
-                }}
-              >
+              <h2 className="section-title mb-4">
                 About
               </h2>
               <div className="w-12 h-0.5 bg-[var(--accent-steel)]" />
@@ -34,12 +25,7 @@ export function About() {
           <div className="md:col-span-8 space-y-8">
             <div>
               <p
-                className="mb-6"
-                style={{
-                  fontSize: '1.125rem',
-                  lineHeight: '1.8',
-                  color: 'var(--gray-700)',
-                }}
+                className="body-lg mb-6"
               >
                 Focused on autonomous aerospace systems, sensing, control, and integration. 
                 Building experimental platforms designed for real-world deployment and scaled 
@@ -47,11 +33,7 @@ export function About() {
               </p>
               
               <p
-                style={{
-                  fontSize: '1rem',
-                  lineHeight: '1.8',
-                  color: 'var(--gray-600)',
-                }}
+                className="body-md"
               >
                 Trajectory toward senior-level systems engineering. Precision over novelty. 
                 Deployment over demonstration.
@@ -59,66 +41,34 @@ export function About() {
             </div>
 
             {/* Education */}
-            <div className="pt-8 border-t" style={{ borderColor: 'var(--gray-300)' }}>
-              <h3
-                className="mb-4"
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 'var(--font-weight-semibold)',
-                  letterSpacing: '0.05em',
-                  color: 'var(--gray-900)',
-                  textTransform: 'uppercase',
-                }}
-              >
+            <div className="pt-8 border-t border-[var(--gray-300)]">
+              <h3 className="subtitle-tight mb-4">
                 Education
               </h3>
               <div className="space-y-2">
-                <p
-                  style={{
-                    fontSize: '1rem',
-                    fontWeight: 'var(--font-weight-medium)',
-                    color: 'var(--gray-800)',
-                  }}
-                >
+                <p className="body-education-title">
                   University of Alabama
                 </p>
-                <p
-                  style={{
-                    fontSize: '0.9375rem',
-                    color: 'var(--gray-600)',
-                  }}
-                >
+                <p className="body-education-detail">
                   Aerospace Engineering & Business Administration
                 </p>
-                <p
-                  style={{
-                    fontSize: '0.875rem',
-                    color: 'var(--gray-500)',
-                  }}
-                >
+                <p className="body-education-meta">
                   Freshman
                 </p>
               </div>
             </div>
 
             {/* Languages */}
-            <div className="pt-8 border-t" style={{ borderColor: 'var(--gray-300)' }}>
-              <h3
-                className="mb-4"
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 'var(--font-weight-semibold)',
-                  letterSpacing: '0.05em',
-                  color: 'var(--gray-900)',
-                  textTransform: 'uppercase',
-                }}
-              >
+            <div className="pt-8 border-t border-[var(--gray-300)]">
+              <h3 className="subtitle-tight mb-4">
                 Languages
               </h3>
               <div className="flex gap-6">
-                <span style={{ fontSize: '0.9375rem', color: 'var(--gray-700)' }}>English</span>
-                <span style={{ fontSize: '0.9375rem', color: 'var(--gray-700)' }}>Russian</span>
-                <span style={{ fontSize: '0.9375rem', color: 'var(--gray-600)' }}>Spanish <span style={{ fontSize: '0.875rem', color: 'var(--gray-500)' }}>(conversational)</span></span>
+                <span className="language-item">English</span>
+                <span className="language-item">Russian</span>
+                <span className="language-item text-[var(--gray-600)]">
+                  Spanish <span className="language-meta">(conversational)</span>
+                </span>
               </div>
             </div>
           </div>

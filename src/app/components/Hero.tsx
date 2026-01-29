@@ -25,12 +25,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="font-[var(--font-weight-bold)] tracking-tight mb-3"
-            style={{ 
-              fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-              lineHeight: '1.1',
-              letterSpacing: '-0.02em'
-            }}
+            className="hero-title mb-3"
           >
             Dimitry Boreyko
           </motion.h1>
@@ -39,13 +34,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-            className="mb-6 tracking-wide uppercase"
-            style={{ 
-              fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-              color: 'var(--gray-600)',
-              letterSpacing: '0.15em',
-              fontWeight: 'var(--font-weight-medium)'
-            }}
+            className="hero-subtitle mb-6"
           >
             Aerospace Engineering & Business Administration
           </motion.p>
@@ -54,13 +43,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-            className="mb-12 max-w-2xl"
-            style={{ 
-              fontSize: 'clamp(1rem, 1.5vw, 1.125rem)',
-              lineHeight: '1.6',
-              color: 'var(--gray-700)',
-              fontWeight: 'var(--font-weight-normal)'
-            }}
+            className="hero-description mb-12 max-w-2xl"
           >
             Autonomous systems integration. Precision engineering. Designed for deployment.
           </motion.p>
@@ -73,12 +56,7 @@ export function Hero() {
           >
             <button
               onClick={scrollToFlagship}
-              className="group flex items-center gap-3 border border-[var(--gray-900)] px-8 py-4 hover:bg-[var(--gray-900)] hover:text-white transition-colors duration-300"
-              style={{
-                fontSize: '0.875rem',
-                letterSpacing: '0.05em',
-                fontWeight: 'var(--font-weight-medium)'
-              }}
+              className="hero-action-primary group flex items-center gap-3 border border-[var(--gray-900)] px-8 py-4 hover:bg-[var(--gray-900)] hover:text-white transition-colors duration-300"
             >
               EXPLORE SYSTEMS
               <ChevronDown 
@@ -90,13 +68,7 @@ export function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-[var(--gray-400)] px-6 py-4 hover:border-[var(--gray-900)] transition-colors duration-300"
-              style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.05em',
-                fontWeight: 'var(--font-weight-medium)',
-                color: 'var(--gray-600)',
-              }}
+              className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-6 py-4 hover:border-[var(--gray-900)] transition-colors duration-300"
             >
               <FileText className="w-4 h-4" strokeWidth={1.5} />
               RESUME
@@ -104,13 +76,7 @@ export function Hero() {
 
             <button
               onClick={scrollToContact}
-              className="flex items-center gap-2 border border-[var(--gray-400)] px-6 py-4 hover:border-[var(--gray-900)] transition-colors duration-300"
-              style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.05em',
-                fontWeight: 'var(--font-weight-medium)',
-                color: 'var(--gray-600)',
-              }}
+              className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-6 py-4 hover:border-[var(--gray-900)] transition-colors duration-300"
             >
               <Mail className="w-4 h-4" strokeWidth={1.5} />
               CONTACT
