@@ -25,16 +25,7 @@ export function ExperienceMetrics() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="mb-12"
-            style={{
-              fontSize: '0.875rem',
-              fontWeight: 'var(--font-weight-semibold)',
-              letterSpacing: '0.1em',
-              color: 'var(--gray-600)',
-              textTransform: 'uppercase',
-            }}
-          >
+          <h2 className="section-eyebrow mb-12">
             Experience
           </h2>
 
@@ -46,47 +37,20 @@ export function ExperienceMetrics() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="border-l-2 pl-8"
-                style={{ borderColor: 'var(--gray-300)' }}
+                className="border-l-2 border-[var(--gray-300)] pl-8"
               >
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span
-                    style={{
-                      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                      fontWeight: 'var(--font-weight-light)',
-                      lineHeight: '1',
-                      color: 'var(--gray-900)',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
+                  <span className="metric-value">
                     {metric.value}
                   </span>
-                  <span
-                    style={{
-                      fontSize: '1.25rem',
-                      fontWeight: 'var(--font-weight-normal)',
-                      color: 'var(--gray-600)',
-                    }}
-                  >
+                  <span className="metric-unit">
                     {metric.unit}
                   </span>
                 </div>
-                <p
-                  className="mb-1"
-                  style={{
-                    fontSize: '1rem',
-                    fontWeight: 'var(--font-weight-medium)',
-                    color: 'var(--gray-800)',
-                  }}
-                >
+                <p className="metric-label mb-1">
                   {metric.label}
                 </p>
-                <p
-                  style={{
-                    fontSize: '0.875rem',
-                    color: 'var(--gray-500)',
-                  }}
-                >
+                <p className="metric-sublabel">
                   {metric.sublabel}
                 </p>
               </motion.div>

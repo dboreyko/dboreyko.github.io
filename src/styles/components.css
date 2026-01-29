@@ -1,0 +1,375 @@
+@layer components {
+  .section-title {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--gray-900);
+  }
+
+  .section-eyebrow {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.1em;
+    color: var(--gray-600);
+    text-transform: uppercase;
+  }
+
+  .subtitle-tight {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.05em;
+    color: var(--gray-900);
+    text-transform: uppercase;
+  }
+
+  .subtitle-wide {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.1em;
+    color: var(--gray-700);
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+    color: var(--gray-600);
+    letter-spacing: 0.15em;
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--gray-700);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .hero-action-primary {
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .hero-action-secondary {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-600);
+  }
+
+  .body-lg {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+  }
+
+  .body-md {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--gray-600);
+  }
+
+  .body-education-title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-800);
+  }
+
+  .body-education-detail {
+    font-size: 0.9375rem;
+    color: var(--gray-600);
+  }
+
+  .body-education-meta {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+  }
+
+  .language-item {
+    font-size: 0.9375rem;
+    color: var(--gray-700);
+  }
+
+  .language-meta {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+  }
+
+  .metric-value {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--font-weight-light);
+    line-height: 1;
+    color: var(--gray-900);
+    letter-spacing: -0.02em;
+  }
+
+  .metric-unit {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-normal);
+    color: var(--gray-600);
+  }
+
+  .metric-label {
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-800);
+  }
+
+  .metric-sublabel {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+  }
+
+  .project-title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-900);
+    line-height: 1.4;
+  }
+
+  .project-status {
+    font-size: 0.625rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-500);
+    background-color: var(--gray-200);
+    letter-spacing: 0.03em;
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+  }
+
+  .project-evidence {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-500);
+    letter-spacing: 0.03em;
+  }
+
+  .project-link-icon {
+    color: var(--gray-900);
+  }
+
+  .project-underline {
+    margin-top: 2px;
+  }
+
+  .contact-card-label {
+    font-size: 0.625rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    color: var(--gray-500);
+    text-transform: uppercase;
+  }
+
+  .contact-card-value {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-700);
+    font-family: var(--font-mono);
+    word-break: break-word;
+  }
+
+  .contact-card-icon {
+    color: var(--gray-600);
+  }
+
+  .contact-footer {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    text-align: center;
+  }
+
+  .lightbox-overlay {
+    background-color: rgba(250, 250, 250, 0.98);
+  }
+
+  .lightbox-button {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .lightbox-caption {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-family: var(--font-mono);
+  }
+
+  .lightbox-counter {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+
+  .flagship-section {
+    background-color: var(--bg-museum);
+    min-height: auto;
+  }
+
+  .flagship-section--expanded {
+    background-color: var(--bg-lab);
+    min-height: 100vh;
+  }
+
+  .flagship-badge {
+    font-size: 0.625rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+    border-color: var(--gray-400);
+    color: var(--gray-600);
+  }
+
+  .flagship-section--expanded .flagship-badge {
+    border-color: var(--accent-steel);
+    color: var(--accent-steel);
+  }
+
+  .flagship-kicker {
+    font-size: 0.625rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+    color: var(--gray-600);
+  }
+
+  .flagship-section--expanded .flagship-kicker {
+    color: var(--gray-500);
+  }
+
+  .flagship-title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--gray-900);
+  }
+
+  .flagship-section--expanded .flagship-title {
+    color: var(--gray-100);
+  }
+
+  .flagship-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+  }
+
+  .flagship-section--expanded .flagship-subtitle {
+    color: var(--gray-400);
+  }
+
+  .flagship-toggle {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+    border-color: var(--gray-400);
+    color: var(--gray-700);
+    background-color: transparent;
+  }
+
+  .flagship-toggle--expanded {
+    border-color: var(--accent-steel);
+    color: var(--accent-steel);
+    background-color: rgba(91, 143, 163, 0.1);
+  }
+
+  .flagship-phase-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+
+  .flagship-phase-line {
+    width: 3rem;
+    height: 1px;
+    background-color: var(--gray-700);
+    opacity: 0.4;
+    transition: all 0.2s ease;
+  }
+
+  .flagship-phase-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    border: 2px solid var(--gray-700);
+    background-color: transparent;
+    transition: all 0.2s ease;
+  }
+
+  .flagship-phase-number {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-600);
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+  }
+
+  .flagship-phase-label {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-400);
+    letter-spacing: 0.03em;
+  }
+
+  .flagship-phase-button.is-active .flagship-phase-line {
+    background-color: var(--accent-steel);
+    opacity: 1;
+  }
+
+  .flagship-phase-button.is-active .flagship-phase-dot {
+    border-color: var(--accent-steel);
+    background-color: var(--accent-steel);
+  }
+
+  .flagship-phase-button.is-active .flagship-phase-number {
+    color: var(--accent-steel);
+  }
+
+  .flagship-phase-title {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-200);
+    letter-spacing: -0.01em;
+  }
+
+  .flagship-phase-description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--gray-400);
+  }
+
+  .flagship-terminal-action {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+  }
+
+  .flagship-terminal-action-muted {
+    border-color: var(--gray-700);
+    color: var(--gray-400);
+  }
+
+  .flagship-terminal-action-primary {
+    border-color: var(--accent-steel);
+    color: var(--accent-steel);
+  }
+
+  .flagship-summary {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--gray-500);
+    font-style: italic;
+  }
+}
