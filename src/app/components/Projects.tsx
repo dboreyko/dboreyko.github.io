@@ -195,9 +195,14 @@ export function Projects() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title mb-16">
-            Projects
-          </h2>
+          <div className="flex flex-wrap items-center gap-3 mb-16">
+            <h2 className="section-title">
+              Projects
+            </h2>
+            <span className="projects-status px-3 py-1 border uppercase tracking-wider">
+              In Development
+            </span>
+          </div>
 
           {/* Personal Projects */}
           <div className="mb-20">

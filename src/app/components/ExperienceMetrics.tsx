@@ -8,6 +8,12 @@ const metrics = [
     sublabel: '100+ hrs CAD',
   },
   {
+    value: '4+',
+    unit: 'years',
+    label: '3D Printing',
+    sublabel: 'Modifications & tuning',
+  },
+  {
     value: '6+',
     unit: 'hours',
     label: 'Manual FPV Flight Time',
