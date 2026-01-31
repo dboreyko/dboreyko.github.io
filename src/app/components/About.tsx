@@ -69,6 +69,9 @@ export function About() {
                 <span className="language-item text-[var(--gray-600)]">
                   Spanish <span className="language-meta">(conversational)</span>
                 </span>
+                <span className="language-item text-[var(--gray-600)]">
+                  Japanese <span className="language-meta">(basic)</span>
+                </span>
               </div>
             </div>
           </div>
