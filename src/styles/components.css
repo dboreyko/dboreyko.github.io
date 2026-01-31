@@ -150,6 +150,14 @@
     color: var(--gray-600);
   }
 
+  .projects-status {
+    font-size: 0.625rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.06em;
+    border-color: var(--gray-300);
+    color: var(--gray-500);
+  }
+
   .project-evidence {
     font-size: 0.75rem;
     font-weight: var(--font-weight-medium);
@@ -282,6 +290,27 @@
     background-color: rgba(91, 143, 163, 0.1);
   }
 
+  .flagship-mode-toggle {
+    border-color: var(--gray-400);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .flagship-mode-button {
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.9rem;
+    color: var(--gray-600);
+    transition: all 0.2s ease;
+  }
+
+  .flagship-mode-button.is-active {
+    color: var(--accent-steel);
+    background-color: rgba(91, 143, 163, 0.15);
+  }
+
   .flagship-phase-button {
     position: relative;
     display: flex;
@@ -314,13 +343,6 @@
     color: var(--gray-600);
     letter-spacing: 0.05em;
     transition: color 0.2s ease;
-  }
-
-  .flagship-phase-label {
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--gray-400);
-    letter-spacing: 0.03em;
   }
 
   .flagship-phase-button.is-active .flagship-phase-line {

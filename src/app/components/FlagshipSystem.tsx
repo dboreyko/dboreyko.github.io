@@ -39,18 +39,28 @@ const phases = [
 
 export function FlagshipSystem() {
   const [viewState, setViewState] = useState<ViewState>('collapsed');
+  const [viewMode, setViewMode] = useState<'stepped' | 'continuous'>('stepped');
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const phaseRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const wheelLockRef = useRef(false);
 
   const isExpanded = viewState !== 'collapsed';
   const activePhase = isExpanded ? viewState : null;
+  const isStepped = viewMode === 'stepped';
 
   // Handle wheel events when expanded to navigate between stages
   useEffect(() => {
-    if (!isExpanded || !contentRef.current) return;
+    if (!isExpanded || !contentRef.current || !isStepped) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
+
+      if (wheelLockRef.current || Math.abs(e.deltaY) < 10) return;
+      wheelLockRef.current = true;
+      setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 550);
       
       const currentIndex = phases.findIndex(p => p.id === viewState);
       if (currentIndex === -1) return;
@@ -70,7 +80,37 @@ export function FlagshipSystem() {
     return () => {
       element.removeEventListener('wheel', handleWheel);
     };
-  }, [isExpanded, viewState]);
+  }, [isExpanded, isStepped, viewState]);
+
+  useEffect(() => {
+    if (!isExpanded || !contentRef.current || isStepped) return;
+
+    const container = contentRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const topEntry = visible[0];
+        const phaseId = topEntry?.target.getAttribute('data-phase') as Phase | null;
+        if (phaseId && phaseId !== viewState) {
+          setViewState(phaseId);
+        }
+      },
+      {
+        root: container,
+        threshold: [0.3, 0.6, 0.9],
+      }
+    );
+
+    phaseRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isExpanded, isStepped, viewState]);
 
   const handleExpand = () => {
     setViewState('sensing');
@@ -102,6 +142,23 @@ export function FlagshipSystem() {
 
   const handlePhaseClick = (phaseId: Phase) => {
     setViewState(phaseId);
+    if (!isStepped) {
+      const phaseIndex = phases.findIndex((phase) => phase.id === phaseId);
+      const target = phaseRefs.current[phaseIndex];
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleModeChange = (mode: 'stepped' | 'continuous') => {
+    setViewMode(mode);
+    if (mode === 'continuous') {
+      setViewState('sensing');
+      requestAnimationFrame(() => {
+        contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   };
 
   // Expose expand function globally for deep-linking
@@ -167,22 +224,40 @@ export function FlagshipSystem() {
               </p>
             </div>
             
-            <button
-              onClick={isExpanded ? handleCollapse : handleExpand}
-              className={`flagship-toggle flex items-center gap-2 px-6 py-3 border transition-all duration-300 hover:bg-opacity-10 ${isExpanded ? 'flagship-toggle--expanded' : ''}`}
-            >
-              {isExpanded ? (
-                <>
-                  <Minus className="w-4 h-4" />
-                  COLLAPSE
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-4 h-4" />
-                  EXPAND
-                </>
-              )}
-            </button>
+            <div className="flex items-center gap-4">
+              <div className="flagship-mode-toggle flex items-center border">
+                <button
+                  type="button"
+                  onClick={() => handleModeChange('stepped')}
+                  className={`flagship-mode-button ${isStepped ? 'is-active' : ''}`}
+                >
+                  Steps
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleModeChange('continuous')}
+                  className={`flagship-mode-button ${!isStepped ? 'is-active' : ''}`}
+                >
+                  Scroll
+                </button>
+              </div>
+              <button
+                onClick={isExpanded ? handleCollapse : handleExpand}
+                className={`flagship-toggle flex items-center gap-2 px-6 py-3 border transition-all duration-300 hover:bg-opacity-10 ${isExpanded ? 'flagship-toggle--expanded' : ''}`}
+              >
+                {isExpanded ? (
+                  <>
+                    <Minus className="w-4 h-4" />
+                    COLLAPSE
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    EXPAND
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </motion.div>
 
@@ -224,86 +299,141 @@ export function FlagshipSystem() {
                         >
                           {phase.number}
                         </span>
-
-                        {/* Phase label - hover only */}
-                        <span
-                          className="flagship-phase-label absolute left-20 whitespace-nowrap opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100"
-                        >
-                          {phase.label}
-                        </span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Content Area */}
-                <div className="flex-1 flex flex-col min-w-0" ref={contentRef}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={viewState}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 10 }}
-                      transition={{ duration: 0.25, ease: 'easeOut' }}
-                      className="flex-1 flex flex-col"
-                    >
-                      {/* Phase Title and Description */}
-                      {currentPhaseData && (
-                        <div className="mb-8">
+                <div
+                  className={`flex-1 flex flex-col min-w-0 ${isStepped ? '' : 'overflow-y-auto pr-4'}`}
+                  ref={contentRef}
+                >
+                  {isStepped ? (
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={viewState}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 10 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="flex-1 flex flex-col"
+                      >
+                        {/* Phase Title and Description */}
+                        {currentPhaseData && (
+                          <div className="mb-6">
+                            <div className="border-l-2 border-[var(--accent-steel)] pl-6">
+                              <div className="flex items-baseline gap-4 mb-2">
+                                <h3 className="flagship-phase-title">
+                                  {currentPhaseData.title}
+                                </h3>
+                              </div>
+                              <p className="flagship-phase-description">
+                                {currentPhaseData.description}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Terminal Actions - Only visible in Phase 4 */}
+                        {activePhase === 'integration' && (
+                          <div
+                            className="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6"
+                          >
+                            <button
+                              onClick={handleCollapseAndScrollToAbout}
+                              className="flagship-terminal-action flagship-terminal-action-muted flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
+                            >
+                              <Minus className="w-4 h-4" />
+                              COLLAPSE SYSTEM
+                            </button>
+
+                            <button
+                              onClick={scrollToAbout}
+                              className="flagship-terminal-action flagship-terminal-action-primary flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
+                            >
+                              CONTINUE TO ABOUT
+                              <ArrowDown className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+
+                        {/* System Diagram */}
+                        <div className="flex-1 flex items-center justify-center">
+                          <SystemDiagram phase={activePhase as Phase} />
+                        </div>
+
+                        {/* Technical Summary - Only visible in non-terminal phases */}
+                        {activePhase !== 'integration' && (
+                          <div
+                            className="mt-8 pt-8 border-t border-[var(--gray-800)]"
+                          >
+                            <p className="flagship-summary max-w-3xl">
+                              Use spine navigator to explore each subsystem. Experimental platform designed for 
+                              eventual real-world deployment with scalable architecture for higher-power aerial platforms.
+                            </p>
+                          </div>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                  ) : (
+                    <div className="flex flex-col gap-16">
+                      {phases.map((phase, index) => (
+                        <div
+                          key={phase.id}
+                          ref={(el) => {
+                            phaseRefs.current[index] = el;
+                          }}
+                          data-phase={phase.id}
+                          className="flex flex-col gap-6"
+                        >
                           <div className="border-l-2 border-[var(--accent-steel)] pl-6">
                             <div className="flex items-baseline gap-4 mb-2">
                               <h3 className="flagship-phase-title">
-                                {currentPhaseData.title}
+                                {phase.title}
                               </h3>
                             </div>
                             <p className="flagship-phase-description">
-                              {currentPhaseData.description}
+                              {phase.description}
                             </p>
                           </div>
+
+                          {phase.id === 'integration' && (
+                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
+                              <button
+                                onClick={handleCollapseAndScrollToAbout}
+                                className="flagship-terminal-action flagship-terminal-action-muted flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
+                              >
+                                <Minus className="w-4 h-4" />
+                                COLLAPSE SYSTEM
+                              </button>
+
+                              <button
+                                onClick={scrollToAbout}
+                                className="flagship-terminal-action flagship-terminal-action-primary flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
+                              >
+                                CONTINUE TO ABOUT
+                                <ArrowDown className="w-4 h-4" />
+                              </button>
+                            </div>
+                          )}
+
+                          <div className="flex items-center justify-center">
+                            <SystemDiagram phase={phase.id} />
+                          </div>
+
+                          {phase.id !== 'integration' && (
+                            <div className="border-t border-[var(--gray-800)] pt-6">
+                              <p className="flagship-summary max-w-3xl">
+                                Use spine navigator to explore each subsystem. Experimental platform designed for 
+                                eventual real-world deployment with scalable architecture for higher-power aerial platforms.
+                              </p>
+                            </div>
+                          )}
                         </div>
-                      )}
-
-                      {/* System Diagram */}
-                      <div className="flex-1 flex items-center justify-center">
-                        <SystemDiagram phase={activePhase as Phase} />
-                      </div>
-
-                      {/* Terminal Actions - Only visible in Phase 4 */}
-                      {activePhase === 'integration' && (
-                        <div
-                          className="mt-8 pt-8 border-t border-[var(--gray-800)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6"
-                        >
-                          <button
-                            onClick={handleCollapseAndScrollToAbout}
-                            className="flagship-terminal-action flagship-terminal-action-muted flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
-                          >
-                            <Minus className="w-4 h-4" />
-                            COLLAPSE SYSTEM
-                          </button>
-
-                          <button
-                            onClick={scrollToAbout}
-                            className="flagship-terminal-action flagship-terminal-action-primary flex items-center justify-center gap-2 border px-8 py-4 transition-colors duration-200 hover:border-[var(--accent-steel)] hover:bg-[var(--accent-steel)] hover:bg-opacity-10"
-                          >
-                            CONTINUE TO ABOUT
-                            <ArrowDown className="w-4 h-4" />
-                          </button>
-                        </div>
-                      )}
-
-                      {/* Technical Summary - Only visible in non-terminal phases */}
-                      {activePhase !== 'integration' && (
-                        <div
-                          className="mt-8 pt-8 border-t border-[var(--gray-800)]"
-                        >
-                          <p className="flagship-summary max-w-3xl">
-                            Use spine navigator to explore each subsystem. Experimental platform designed for 
-                            eventual real-world deployment with scalable architecture for higher-power aerial platforms.
-                          </p>
-                        </div>
-                      )}
-                    </motion.div>
-                  </AnimatePresence>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
