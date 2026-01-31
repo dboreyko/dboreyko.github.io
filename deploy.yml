@@ -27,6 +27,16 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - run: ls -la dist
+      - run: ls -la dist/assets || true
+      - name: Assert built HTML references assets (not /src)
+        run: |
+          echo "---- dist/index.html (head) ----"
+          sed -n '1,120p' dist/index.html
+          if grep -q "/src/main.tsx" dist/index.html; then
+            echo "ERROR: dist/index.html still references /src/main.tsx"
+            exit 1
+          fi
 
       - uses: actions/upload-pages-artifact@v3
         with:
