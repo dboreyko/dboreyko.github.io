@@ -85,6 +85,49 @@ export function FlagshipSystem() {
   useEffect(() => {
     if (!isExpanded || !contentRef.current || isStepped) return;
 
+    const handleWheel = (e: WheelEvent) => {
+      const currentIndex = phases.findIndex(p => p.id === viewState);
+      if (currentIndex === -1) return;
+
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
+      const isAtFirst = currentIndex === 0;
+      const isAtLast = currentIndex === phases.length - 1;
+
+      if ((isScrollingDown && isAtLast) || (isScrollingUp && isAtFirst)) {
+        return;
+      }
+
+      e.preventDefault();
+
+      if (wheelLockRef.current || Math.abs(e.deltaY) < 10) return;
+      wheelLockRef.current = true;
+      setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 550);
+
+      if (isScrollingDown && currentIndex < phases.length - 1) {
+        const nextPhase = phases[currentIndex + 1];
+        phaseRefs.current[currentIndex + 1]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setViewState(nextPhase.id);
+      } else if (isScrollingUp && currentIndex > 0) {
+        const prevPhase = phases[currentIndex - 1];
+        phaseRefs.current[currentIndex - 1]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setViewState(prevPhase.id);
+      }
+    };
+
+    const element = contentRef.current;
+    element.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      element.removeEventListener('wheel', handleWheel);
+    };
+  }, [isExpanded, isStepped, viewState]);
+
+  useEffect(() => {
+    if (!isExpanded || !contentRef.current || isStepped) return;
+
     const container = contentRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
