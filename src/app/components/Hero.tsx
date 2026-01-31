@@ -1,7 +1,10 @@
-import { motion } from 'motion/react';
-import { ChevronDown, FileText, Mail } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronDown, FileText, Mail, X, Download } from 'lucide-react';
 
 export function Hero() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
   const scrollToFlagship = () => {
     const flagship = document.getElementById('flagship-system');
     flagship?.scrollIntoView({ behavior: 'smooth' });
@@ -11,6 +14,15 @@ export function Hero() {
     const contact = document.getElementById('contact-section');
     contact?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (!isResumeOpen) return;
+
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isResumeOpen]);
 
   return (
     <motion.section
@@ -64,15 +76,14 @@ export function Hero() {
               />
             </button>
 
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setIsResumeOpen(true)}
               className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-6 py-4 hover:border-[var(--gray-900)] transition-colors duration-300"
             >
               <FileText className="w-4 h-4" strokeWidth={1.5} />
               RESUME
-            </a>
+            </button>
 
             <button
               onClick={scrollToContact}
@@ -84,6 +95,71 @@ export function Hero() {
           </motion.div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isResumeOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="lightbox-overlay fixed inset-0 z-50 flex items-center justify-center px-6 py-10"
+            onClick={() => setIsResumeOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-5xl bg-white border border-[var(--gray-300)] shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between border-b border-[var(--gray-200)] px-6 py-4">
+                <div className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[var(--gray-600)]">
+                  <FileText className="w-4 h-4" />
+                  Resume Preview
+                </div>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="/resume.pdf"
+                    download="Dimitry_Boreyko_Resume.pdf"
+                    className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-4 py-2 text-xs hover:border-[var(--gray-900)] transition-colors duration-300"
+                  >
+                    <Download className="w-4 h-4" />
+                    DOWNLOAD PDF
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setIsResumeOpen(false)}
+                    className="lightbox-button flex h-10 w-10 items-center justify-center border border-[var(--gray-400)] transition-colors duration-300 hover:border-[var(--gray-900)] hover:bg-[var(--gray-900)] hover:text-white"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div className="h-[70vh] bg-[var(--gray-100)]">
+                <object
+                  data="/resume.pdf"
+                  type="application/pdf"
+                  className="h-full w-full"
+                >
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6 text-center text-sm text-[var(--gray-600)]">
+                    <p>PDF preview unavailable. Use the download button to access the resume.</p>
+                    <a
+                      href="/resume.pdf"
+                      download="Dimitry_Boreyko_Resume.pdf"
+                      className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-4 py-2 text-xs hover:border-[var(--gray-900)] transition-colors duration-300"
+                    >
+                      <Download className="w-4 h-4" />
+                      DOWNLOAD PDF
+                    </a>
+                  </div>
+                </object>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   );
 }
