@@ -45,16 +45,26 @@ export function About() {
               <h3 className="subtitle-tight mb-4">
                 Education
               </h3>
-              <div className="space-y-2">
-                <p className="body-education-title">
-                  University of Alabama
-                </p>
-                <p className="body-education-detail">
-                  Aerospace Engineering & Business Administration
-                </p>
-                <p className="body-education-meta">
-                  Freshman
-                </p>
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <p className="body-education-title">
+                    University of Alabama
+                  </p>
+                  <p className="body-education-detail">
+                    Aerospace Engineering & Business Administration
+                  </p>
+                  <p className="body-education-meta">
+                    Freshman
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <p className="body-education-title">
+                    Hokkaido International School
+                  </p>
+                  <p className="body-education-detail">
+                    High School Diploma
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -68,9 +78,6 @@ export function About() {
                 <span className="language-item">Russian</span>
                 <span className="language-item text-[var(--gray-600)]">
                   Spanish <span className="language-meta">(conversational)</span>
-                </span>
-                <span className="language-item text-[var(--gray-600)]">
-                  Japanese <span className="language-meta">(basic)</span>
                 </span>
               </div>
             </div>
