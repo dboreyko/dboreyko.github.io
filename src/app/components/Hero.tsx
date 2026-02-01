@@ -121,7 +121,7 @@ export function Hero() {
                 </div>
                 <div className="flex items-center gap-3">
                   <a
-                    href="/resume.pdf"
+                    href="/Dimitry_Boreyko_Resume.pdf"
                     download="Dimitry_Boreyko_Resume.pdf"
                     className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-4 py-2 text-xs hover:border-[var(--gray-900)] transition-colors duration-300"
                   >
@@ -139,14 +139,14 @@ export function Hero() {
               </div>
               <div className="h-[70vh] bg-[var(--gray-100)]">
                 <object
-                  data="/resume.pdf"
+                  data="/Dimitry_Boreyko_Resume.pdf"
                   type="application/pdf"
                   className="h-full w-full"
                 >
                   <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6 text-center text-sm text-[var(--gray-600)]">
                     <p>PDF preview unavailable. Use the download button to access the resume.</p>
                     <a
-                      href="/resume.pdf"
+                      href="/Dimitry_Boreyko_Resume.pdf"
                       download="Dimitry_Boreyko_Resume.pdf"
                       className="hero-action-secondary flex items-center gap-2 border border-[var(--gray-400)] px-4 py-2 text-xs hover:border-[var(--gray-900)] transition-colors duration-300"
                     >
